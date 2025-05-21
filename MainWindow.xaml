@@ -2,7 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:dntk="clr-namespace:Xceed.Wpf.Toolkit;assembly=DotNetProjects.Wpf.Extended.Toolkit"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MusicDbEditor"
         mc:Ignorable="d"
@@ -23,10 +23,11 @@
 
     <DockPanel> <!-- TODO: Look at Menu wpf tutorial for commands and implement -->
         <Menu DockPanel.Dock="Top">
-            <MenuItem Header="_File"> <!-- underscore in front means accelerator keys can be used [alt in this case] -->
+            <MenuItem Header="_File">
+                <!-- underscore in front means accelerator keys can be used [alt in this case] -->
                 <MenuItem Header="_New" />
             </MenuItem>
-            
+
         </Menu>
         <TabControl>
             <TabItem Header="Tracks">
@@ -41,23 +42,23 @@
                         <StackPanel Margin="5,8,5,0">
                             <DockPanel Margin="0, 0, 0, 5">
                                 <Button DockPanel.Dock="Right" Margin="5,0,0,0">+</Button>
-                                <xctk:WatermarkTextBox Watermark="Search"></xctk:WatermarkTextBox>
+                                <dntk:WatermarkTextBox Watermark="Search"></dntk:WatermarkTextBox>
                             </DockPanel>
                             <DataGrid Height="300">
-                            
+
                             </DataGrid>
                         </StackPanel>
                     </Border>
 
                     <StackPanel Grid.Column="1" Margin="5,0,5,0"> <!-- Right side -->
                         <Label>Name</Label>
-                        <xctk:WatermarkTextBox Watermark="Name"></xctk:WatermarkTextBox>
+                        <dntk:WatermarkTextBox Watermark=""></dntk:WatermarkTextBox>
                         <Label>Stream Player Name</Label>
-                        <xctk:WatermarkTextBox Watermark="Stream Player Name"></xctk:WatermarkTextBox>
+                        <dntk:WatermarkTextBox Watermark=""></dntk:WatermarkTextBox>
                         <Label>Sort Name</Label>
-                        <xctk:WatermarkTextBox Watermark="Sort Name"></xctk:WatermarkTextBox>
+                        <dntk:WatermarkTextBox Watermark=""></dntk:WatermarkTextBox>
                         <Label>Link</Label>
-                        <xctk:WatermarkTextBox Watermark="Link" Style="{StaticResource BottomSpacerMargin}"></xctk:WatermarkTextBox>
+                        <dntk:WatermarkTextBox Watermark="" Style="{StaticResource BottomSpacerMargin}"></dntk:WatermarkTextBox>
                         <Label>Album</Label>
                         <DockPanel>
                             <Button DockPanel.Dock="Right"  Margin="5,0,0,0">+</Button>
