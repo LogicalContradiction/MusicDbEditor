@@ -30,7 +30,7 @@
 
         </Menu>
         <TabControl>
-            <TabItem Header="Tracks">
+            <TabItem x:Name="trackTab" Header="Tracks">
                 <Grid>
                     <!-- Can add another row if need to align delete/cancel/confirm buttons with future data pagenation buttons -->
                     <Grid.ColumnDefinitions >
@@ -44,7 +44,16 @@
                                 <Button DockPanel.Dock="Right" Margin="5,0,0,0">+</Button>
                                 <dntk:WatermarkTextBox Watermark="Search"></dntk:WatermarkTextBox>
                             </DockPanel>
-                            <DataGrid Height="300">
+                            <DataGrid Height="300" ItemsSource="{Binding Tracks}" AutoGenerateColumns="False">
+
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Track Name" Binding="{Binding Name}"/>
+                                    <DataGridTextColumn Header="Name in Stream Player" Binding="{Binding NameInStreamPlayer}"/>
+                                    <DataGridTextColumn Header="Album Name" Binding="{Binding AlbumName}"/>
+                                    <DataGridTextColumn Header="Link" Binding="{Binding Link}"/>
+                                    <DataGridTextColumn Header="Source Media Name" Binding="{Binding SourceMediaName}"/>
+                                    <DataGridTextColumn Header="Notes" Binding="{Binding Notes}"/>
+                                </DataGrid.Columns>
 
                             </DataGrid>
                             <!-- Advance the data page bar -->
@@ -58,7 +67,8 @@
                         </StackPanel>
                     </Border>
 
-                    <StackPanel Grid.Column="1" Margin="5,0,5,0"> <!-- Right side -->
+                    <!-- Right side -->
+                    <StackPanel Grid.Column="1" Margin="5,0,5,0"> 
                         <Label>Name</Label>
                         <dntk:WatermarkTextBox Watermark=""></dntk:WatermarkTextBox>
                         <Label>Stream Player Name</Label>
@@ -79,11 +89,11 @@
                         </DockPanel>
                         <Label>Notes</Label>
                         <TextBox VerticalScrollBarVisibility="Visible" Height="50"></TextBox>
-                        <!-- Maybe these buttons are greyed out unless actively editing -->
+                        <!-- TODO: replace the text with icons -->
                         <DockPanel LastChildFill="False" Margin="0,10,0,0">
-                            <Button DockPanel.Dock="Right" Margin="5,0,0,0">+</Button> <!-- Rightmost button -->
-                            <Button DockPanel.Dock="Right">+</Button> <!-- Second right button -->
-                            <Button DockPanel.Dock="Left">+</Button> <!-- Leftmost button -->
+                            <Button DockPanel.Dock="Right" Margin="5,0,0,0">confirm</Button> <!-- Rightmost button -->
+                            <Button DockPanel.Dock="Right">clear</Button> <!-- Second right button -->
+                            <Button DockPanel.Dock="Left">delete</Button> <!-- Leftmost button -->
                         </DockPanel>
                     </StackPanel>
 

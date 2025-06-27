@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using MusicDbEditor.ViewModels;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -19,6 +20,9 @@ namespace MusicDbEditor
         public MainWindow()
         {
             InitializeComponent();
+
+            // Bind the view models to the tabs
+            trackTab.DataContext = new TrackTabViewModel();
         }
     }
 }

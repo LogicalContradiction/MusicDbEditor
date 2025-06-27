@@ -9,8 +9,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Commands - Copy\**" />
+    <EmbeddedResource Remove="Commands - Copy\**" />
+    <None Remove="Commands - Copy\**" />
+    <Page Remove="Commands - Copy\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="DotNetProjects.Extended.Wpf.Toolkit" Version="5.0.124" />
-    <PackageReference Include="System.Data.SQLite.Core" Version="1.0.119" />
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="9.0.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="tests\testDB.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
