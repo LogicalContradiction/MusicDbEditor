@@ -92,8 +92,12 @@ namespace MusicDbEditor
                     command.CommandText =
                         @"
                             SELECT 
-                                id, name, name_in_stream_player, album_id, link, notes, source_media_id
-                            FROM track";
+                                track.id, track.name, track.name_in_stream_player, album.name, track.link, track.notes, source_media.name
+                            FROM track
+                            LEFT JOIN album
+                            ON track.album_id = album.id
+                            LEFT JOIN source_media
+                            ON track.source_media_id = source_media.id;";
 
                     using (var reader = command.ExecuteReader())
                     {
@@ -104,10 +108,10 @@ namespace MusicDbEditor
                                 Id = reader.GetInt32(0),
                                 Name = reader.GetString(1),
                                 NameInStreamPlayer = reader.GetString(2),
-                                AlbumName = reader.GetInt32(3).ToString(),
+                                AlbumName = reader.GetString(3),
                                 Link = reader.GetString(4),
                                 Notes = reader.GetString(5),
-                                SourceMediaName = reader.GetInt32(6).ToString(),
+                                SourceMediaName = reader.GetString(6),
                             });
                         }
                     }
