@@ -60,6 +60,7 @@
                                         Header="Name in Stream Player" 
                                         Width="*"
                                         Binding="{Binding NameInStreamPlayer}"/>
+                                    
                                     <!-- Not using these columns 
                                     
                                     <DataGridTextColumn Header="Album Name" Binding="{Binding AlbumName}"/>
@@ -143,7 +144,43 @@
                 </Grid>
             </TabItem>
 
-            <TabItem Header="Albums" />
+            <!-- Album tab -->
+            <TabItem x:Name="albumTab" Header="Albums">
+                <Grid Margin="5,8,5,5">
+                    <DataGrid
+                        AutoGenerateColumns="False"
+                        IsReadOnly="True"
+                        CanUserReorderColumns="False"
+                        ItemsSource="{Binding Albums}">
+
+                        <DataGrid.Columns>
+                            <DataGridTextColumn 
+                                Header="Name"
+                                Width="*"
+                                Binding="{Binding Name}"/>
+                            <DataGridTextColumn 
+                                Header="Sort Name"
+                                Width="*"
+                                Binding="{Binding SortName}"/>
+                            <DataGridTextColumn 
+                                Header="Database Link"
+                                Width="*"
+                                Binding="{Binding DatabaseLink}"/>
+                            <DataGridTextColumn 
+                                Header="Purchase Link"
+                                Width="*"
+                                Binding="{Binding PurchaseLink}"/>
+
+
+                        </DataGrid.Columns>
+                        
+                        
+                    </DataGrid>
+
+
+                </Grid>
+            </TabItem>
+            
             <TabItem Header="Sources" />
             <TabItem Header="Tags" />
             <TabItem Header="Tag Categories" />

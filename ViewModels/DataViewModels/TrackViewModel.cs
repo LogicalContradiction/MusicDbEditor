@@ -1,12 +1,10 @@
 ﻿using MusicDbEditor.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MusicDbEditor.ViewModels
 {
+    /// <summary>
+    /// View model representing track data
+    /// </summary>
     internal class TrackViewModel : BaseViewModel
     {
         #region Properties

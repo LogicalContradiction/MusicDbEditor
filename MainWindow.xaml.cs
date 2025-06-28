@@ -1,4 +1,5 @@
 ﻿using MusicDbEditor.ViewModels;
+using MusicDbEditor.ViewModels.DataViewModels;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -23,6 +24,7 @@ namespace MusicDbEditor
 
             // Bind the view models to the tabs
             trackTab.DataContext = new TrackTabViewModel();
+            albumTab.DataContext = new AlbumTabViewModel();
         }
     }
 }

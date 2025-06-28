@@ -78,6 +78,10 @@ namespace MusicDbEditor
 
         #region Data Retrieveal Methods
 
+        /// <summary>
+        /// Queries the database for track info. Also left joins on album and source media to get their names
+        /// </summary>
+        /// <returns>A list of Track objects representing the tracks in the database</returns>
         internal List<Track> GetTrackData()
         {
             List<Track> result = new List<Track>();
@@ -119,9 +123,57 @@ namespace MusicDbEditor
             }
             catch (SqliteException e)
             {
-                MessageBox.Show($"CWD: {Directory.GetCurrentDirectory()}\n\nThere was an error when accessing the database.\nError text: '{e}'");
+                MessageBox.Show($"There was an error when accessing the database.\nError text: '{e}'");
             }
             return result;
+        }
+
+        /// <summary>
+        /// Queries the database for album information
+        /// </summary>
+        /// <returns>A list of Album objects representing the albums in the database</returns>
+        internal List<Album> GetAlbumData()
+        {
+            List<Album> result = new List<Album>();
+
+            try
+            {
+                // open connection to db
+                using (var connection = new SqliteConnection(ConnectionString.ToString()))
+                {
+                    connection.Open();
+
+                    // create and execute the query
+                    var command = connection.CreateCommand();
+                    command.CommandText =
+                        @"
+                            SELECT
+                                id, name, sort_name, database_link, purchase_link
+                            FROM album;";
+
+                    // read the results into objects and put them into a list
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            result.Add(new Album()
+                            {
+                                Id = reader.GetInt32(0),
+                                Name = reader.GetString(1),
+                                SortName = reader.GetString(2),
+                                DatabaseLink = reader.GetString(3),
+                                PurchaseLink = reader.GetString(4),
+                            });
+                        }
+                    }
+                }
+            }
+            catch (SqliteException e) 
+            {
+                MessageBox.Show($"There was an error when accessing the database.\nError text: '{e}'");
+            }
+            return result;
+
         }
 
 
