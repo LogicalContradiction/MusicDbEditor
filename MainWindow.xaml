@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MusicDbEditor"
         mc:Ignorable="d"
-        Title="MainWindow" Height="520" Width="800"
+        Title="MainWindow" Height="515" Width="800"
         WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
@@ -167,26 +167,54 @@
                         ItemsSource="{Binding Albums}">
 
                         <DataGrid.Columns>
+                            <!-- Name col -->
                             <DataGridTextColumn 
                                 Header="Name"
                                 Width="*"
                                 ElementStyle="{StaticResource DataGridOverflowEllipse}"
-                                Binding="{Binding Name}"/>
+                                Binding="{Binding Name}">
+                                <DataGridTextColumn.CellStyle>
+                                    <Style TargetType="DataGridCell">
+                                        <Setter Property="ToolTip" Value="{Binding Name}"/>
+                                    </Style>
+                                </DataGridTextColumn.CellStyle>
+                            </DataGridTextColumn>
+                            <!-- Sort Name col-->
                             <DataGridTextColumn 
                                 Header="Sort Name"
                                 Width="*"
                                 ElementStyle="{StaticResource DataGridOverflowEllipse}"
-                                Binding="{Binding SortName}"/>
+                                Binding="{Binding SortName}">
+                                <DataGridTextColumn.CellStyle>
+                                    <Style TargetType="DataGridCell">
+                                        <Setter Property="ToolTip" Value="{Binding SortName}"/>
+                                    </Style>
+                                </DataGridTextColumn.CellStyle>
+                            </DataGridTextColumn>
+                            <!-- Database Link col-->
                             <DataGridTextColumn 
                                 Header="Database Link"
                                 Width="*"
                                 ElementStyle="{StaticResource DataGridOverflowEllipse}"
-                                Binding="{Binding DatabaseLink}"/>
+                                Binding="{Binding DatabaseLink}">
+                                <DataGridTextColumn.CellStyle>
+                                    <Style TargetType="DataGridCell">
+                                        <Setter Property="ToolTip" Value="{Binding DatabaseLink}"/>
+                                    </Style>
+                                </DataGridTextColumn.CellStyle>
+                            </DataGridTextColumn>
+                            <!-- Purchase Link col -->
                             <DataGridTextColumn 
                                 Header="Purchase Link"
                                 Width="*"
                                 ElementStyle="{StaticResource DataGridOverflowEllipse}"
-                                Binding="{Binding PurchaseLink}"/>
+                                Binding="{Binding PurchaseLink}">
+                                <DataGridTextColumn.CellStyle>
+                                    <Style TargetType="DataGridCell">
+                                        <Setter Property="ToolTip" Value="{Binding PurchaseLink}"/>
+                                    </Style>
+                                </DataGridTextColumn.CellStyle>
+                            </DataGridTextColumn>
                         </DataGrid.Columns>
                         <!-- Album full info section that appears when clicking on a row -->
                         <DataGrid.RowDetailsTemplate>
