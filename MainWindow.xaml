@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MusicDbEditor"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="800"
+        Title="MainWindow" Height="520" Width="800"
         WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
@@ -17,6 +17,10 @@
         <Style x:Key="BottomSpacerMargin">
             <Setter Property="Control.Margin" Value="0,0,0,10" />
             <!-- Qualify the property [Margin] with a class name [Property="ClassName.Property"]-->
+        </Style>
+        <Style x:Key="DataGridOverflowEllipse" TargetType="{x:Type TextBlock}">
+            <!-- Sets the textOverflow property for datagrids to ellipses -->
+            <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
         </Style>
     </Window.Resources>
 
@@ -49,6 +53,7 @@
                                 AutoGenerateColumns="False"
                                 IsReadOnly="True"
                                 CanUserReorderColumns="False"
+                                HeadersVisibility="Column"
                                 ItemsSource="{Binding Tracks}">
 
                                 <DataGrid.Columns>
@@ -146,39 +151,98 @@
 
             <!-- Album tab -->
             <TabItem x:Name="albumTab" Header="Albums">
-                <Grid Margin="5,8,5,5">
+                <StackPanel Margin="15,20,15,15">
+
+                    <dntk:WatermarkTextBox Margin="0,0,0,12" Watermark="Search"></dntk:WatermarkTextBox>
+                    
                     <DataGrid
                         AutoGenerateColumns="False"
                         IsReadOnly="True"
                         CanUserReorderColumns="False"
+                        HeadersVisibility="Column"
+                        Height="330"
+                        Margin="0,0,0,8"
+                        AlternatingRowBackground="#f3f3f3"
+                        AlternationCount="2"
                         ItemsSource="{Binding Albums}">
 
                         <DataGrid.Columns>
                             <DataGridTextColumn 
                                 Header="Name"
                                 Width="*"
+                                ElementStyle="{StaticResource DataGridOverflowEllipse}"
                                 Binding="{Binding Name}"/>
                             <DataGridTextColumn 
                                 Header="Sort Name"
                                 Width="*"
+                                ElementStyle="{StaticResource DataGridOverflowEllipse}"
                                 Binding="{Binding SortName}"/>
                             <DataGridTextColumn 
                                 Header="Database Link"
                                 Width="*"
+                                ElementStyle="{StaticResource DataGridOverflowEllipse}"
                                 Binding="{Binding DatabaseLink}"/>
                             <DataGridTextColumn 
                                 Header="Purchase Link"
                                 Width="*"
+                                ElementStyle="{StaticResource DataGridOverflowEllipse}"
                                 Binding="{Binding PurchaseLink}"/>
-
-
                         </DataGrid.Columns>
+                        <!-- Album full info section that appears when clicking on a row -->
+                        <DataGrid.RowDetailsTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Vertical" Margin="10,5,10,8">
+                                    <!-- Name -->
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Name:" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                        <TextBlock Text="{Binding Name}"/>
+                                    </StackPanel>
+                                    <!-- Sort Name -->
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Sort Name:" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                        <TextBlock Text="{Binding SortName}"/>
+                                    </StackPanel>
+                                    <!-- Database link -->
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Database Link:" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                        <TextBlock Text="{Binding DatabaseLink}"/>
+                                    </StackPanel>
+                                    <!-- Purchase Link -->
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Purchase Link:" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                        <TextBlock Text="{Binding PurchaseLink}"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGrid.RowDetailsTemplate>
                         
                         
                     </DataGrid>
+                    
+                    <!-- Buttons to add/edit/delete entries -->
+                    <DockPanel LastChildFill="False">
+                        <Button 
+                            x:Name="albumAddButton"
+                            DockPanel.Dock="Right"
+                            Margin="5,0,0,0">
+                            add
+                        </Button>
+                        <Button 
+                            x:Name="albumEditButton"
+                            DockPanel.Dock="Right"
+                            Margin="15,0,0,0">
+                            edit
+                        </Button>
+                        <Button 
+                            x:Name="albumDeleteButton"
+                            DockPanel.Dock="Right">
+                            delete
+                        </Button>
+
+                    </DockPanel>
 
 
-                </Grid>
+                </StackPanel>
             </TabItem>
             
             <TabItem Header="Sources" />
