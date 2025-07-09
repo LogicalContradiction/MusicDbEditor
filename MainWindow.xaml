@@ -167,6 +167,7 @@
                         ItemsSource="{Binding Albums}">
 
                         <DataGrid.Columns>
+                            <!-- TODO: figure out how to stop tooltip from showing if the cell is empty -->
                             <!-- Name col -->
                             <DataGridTextColumn 
                                 Header="Name"
@@ -175,7 +176,12 @@
                                 Binding="{Binding Name}">
                                 <DataGridTextColumn.CellStyle>
                                     <Style TargetType="DataGridCell">
-                                        <Setter Property="ToolTip" Value="{Binding Name}"/>
+                                        <!-- Trigger to only display tooltip if the cell has text -->
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding HasName}" Value="True">
+                                                <Setter Property="ToolTip" Value="{Binding Name}"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
                                     </Style>
                                 </DataGridTextColumn.CellStyle>
                             </DataGridTextColumn>
@@ -187,7 +193,12 @@
                                 Binding="{Binding SortName}">
                                 <DataGridTextColumn.CellStyle>
                                     <Style TargetType="DataGridCell">
-                                        <Setter Property="ToolTip" Value="{Binding SortName}"/>
+                                        <!-- Trigger to only display tooltip if the cell has text -->
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding HasSortName}" Value="True">
+                                                <Setter Property="ToolTip" Value="{Binding SortName}"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
                                     </Style>
                                 </DataGridTextColumn.CellStyle>
                             </DataGridTextColumn>
@@ -199,7 +210,12 @@
                                 Binding="{Binding DatabaseLink}">
                                 <DataGridTextColumn.CellStyle>
                                     <Style TargetType="DataGridCell">
-                                        <Setter Property="ToolTip" Value="{Binding DatabaseLink}"/>
+                                        <!-- Trigger to only display tooltip if the cell has text -->
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding HasDatabaseLink}" Value="True">
+                                                <Setter Property="ToolTip" Value="{Binding DatabaseLink}"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
                                     </Style>
                                 </DataGridTextColumn.CellStyle>
                             </DataGridTextColumn>
@@ -211,7 +227,12 @@
                                 Binding="{Binding PurchaseLink}">
                                 <DataGridTextColumn.CellStyle>
                                     <Style TargetType="DataGridCell">
-                                        <Setter Property="ToolTip" Value="{Binding PurchaseLink}"/>
+                                        <!-- Trigger to only display tooltip if the cell has text -->
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding HasPurchaseLink}" Value="True">
+                                                <Setter Property="ToolTip" Value="{Binding PurchaseLink}"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
                                     </Style>
                                 </DataGridTextColumn.CellStyle>
                             </DataGridTextColumn>

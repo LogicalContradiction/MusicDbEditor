@@ -77,6 +77,54 @@ namespace MusicDbEditor.ViewModels.TabViewModels
 
         }
 
+        /// <summary>
+        /// Boolean to check if the Name isn't null or an empty string.
+        /// Used to determine if a tooltip needs to be shown.
+        /// </summary>
+        public bool HasName
+        {
+            get
+            {
+                return Name != null && Name != "";
+            }
+        }
+
+        /// <summary>
+        /// Boolean to check if the Sort Name isn't null or an empty string.
+        /// Used to determine if a tooltip needs to be shown.
+        /// </summary>
+        public bool HasSortName
+        {
+            get
+            {
+                return SortName != null && SortName != "";
+            }
+        }
+
+        /// <summary>
+        /// Boolean to check if the DatabaseLink isn't null or an empty string.
+        /// Used to determine if a tooltip needs to be shown.
+        /// </summary>
+        public bool HasDatabaseLink
+        {
+            get
+            {
+                return DatabaseLink != null && DatabaseLink != "";
+            }
+        }
+
+        /// <summary>
+        /// Boolean to check if the Name isn't null or an empty string.
+        /// Used to determine if a tooltip needs to be shown.
+        /// </summary>
+        public bool HasPurchaseLink
+        {
+            get
+            {
+                return PurchaseLink != null && PurchaseLink != "";
+            }
+        }
+
         #endregion
 
         #region Constructor
