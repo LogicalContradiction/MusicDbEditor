@@ -1,8 +1,8 @@
 ﻿
-using MusicDbEditor.ViewModels.TabViewModels;
+using MusicDbEditor.ViewModels.DataViewModels;
 using System.Collections.ObjectModel;
 
-namespace MusicDbEditor.ViewModels.DataViewModels
+namespace MusicDbEditor.ViewModels.TabViewModels
 {
     /// <summary>
     /// View model to represent the album tab

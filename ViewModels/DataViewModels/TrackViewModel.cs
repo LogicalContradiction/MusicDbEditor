@@ -1,6 +1,6 @@
 ﻿using MusicDbEditor.Models;
 
-namespace MusicDbEditor.ViewModels
+namespace MusicDbEditor.ViewModels.DataViewModels
 {
     /// <summary>
     /// View model representing track data

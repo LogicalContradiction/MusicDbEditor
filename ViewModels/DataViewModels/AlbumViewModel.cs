@@ -1,7 +1,7 @@
 ﻿
 using MusicDbEditor.Models;
 
-namespace MusicDbEditor.ViewModels.TabViewModels
+namespace MusicDbEditor.ViewModels.DataViewModels
 {
     /// <summary>
     /// View model representing album data

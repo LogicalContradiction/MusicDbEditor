@@ -1,13 +1,8 @@
-﻿using MusicDbEditor.Commands;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
+using MusicDbEditor.ViewModels.DataViewModels;
 using System.Windows.Input;
 
-namespace MusicDbEditor.ViewModels
+namespace MusicDbEditor.ViewModels.TabViewModels
 {
     internal class TrackTabViewModel : BaseViewModel
     {
