@@ -262,7 +262,8 @@
                         <Button 
                             x:Name="albumAddButton"
                             DockPanel.Dock="Right"
-                            Margin="5,0,0,0">
+                            Margin="5,0,0,0"
+                            Command="{Binding AddEditAlbumCommand}">
                             add
                         </Button>
                         <Button 

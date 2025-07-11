@@ -4,7 +4,7 @@
     /// <summary>
     /// Represents info needed to display in Album tab
     /// </summary>
-    class Album
+    public class Album
     {
         #region Properties
 

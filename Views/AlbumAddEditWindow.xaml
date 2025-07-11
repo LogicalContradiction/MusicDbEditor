@@ -24,16 +24,16 @@
             
             
             <Label>Name</Label>
-            <dntk:WatermarkTextBox></dntk:WatermarkTextBox>
+            <dntk:WatermarkTextBox x:Name="NameTextBox"></dntk:WatermarkTextBox>
 
             <Label>Sort Name</Label>
-            <dntk:WatermarkTextBox Style="{StaticResource BottomSpacerMargin}"></dntk:WatermarkTextBox>
+            <dntk:WatermarkTextBox Style="{StaticResource BottomSpacerMargin}" x:Name="SortNameTextBox"></dntk:WatermarkTextBox>
 
             <Label>Database Link</Label>
-            <dntk:WatermarkTextBox></dntk:WatermarkTextBox>
+            <dntk:WatermarkTextBox x:Name="DatabaseLinkTextBox"></dntk:WatermarkTextBox>
 
             <Label>Purchase Link</Label>
-            <dntk:WatermarkTextBox></dntk:WatermarkTextBox>
+            <dntk:WatermarkTextBox x:Name="PurchaseLinkTextBox"></dntk:WatermarkTextBox>
             
             <!-- Buttons panel -->
             <DockPanel LastChildFill="False" Margin="0,5,0,0">
