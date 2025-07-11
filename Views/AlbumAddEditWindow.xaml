@@ -3,10 +3,44 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:dntk="clr-namespace:Xceed.Wpf.Toolkit;assembly=DotNetProjects.Wpf.Extended.Toolkit"
         xmlns:local="clr-namespace:MusicDbEditor.Views"
         mc:Ignorable="d"
-        Title="AlbumAddEditWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="AlbumAddEditWindow" Height="280" Width="500">
+
+    <Window.Resources>
+
+    </Window.Resources>
+    <Border BorderThickness="0" Margin="5">
+        <StackPanel>
+            <!-- Header -->
+            <Label 
+                HorizontalAlignment="Center" 
+                Padding="0,0,0,8"
+                FontSize="16"
+                FontWeight="Bold">
+                New Album
+            </Label>
+            
+            
+            <Label>Name</Label>
+            <dntk:WatermarkTextBox></dntk:WatermarkTextBox>
+
+            <Label>Sort Name</Label>
+            <dntk:WatermarkTextBox Style="{StaticResource BottomSpacerMargin}"></dntk:WatermarkTextBox>
+
+            <Label>Database Link</Label>
+            <dntk:WatermarkTextBox></dntk:WatermarkTextBox>
+
+            <Label>Purchase Link</Label>
+            <dntk:WatermarkTextBox></dntk:WatermarkTextBox>
+            
+            <!-- Buttons panel -->
+            <DockPanel LastChildFill="False" Margin="0,5,0,0">
+                <Button DockPanel.Dock="Right" Margin="5,0,0,0" x:Name="NewAlbumAddConfirm">add</Button>
+                <Button DockPanel.Dock="Right" x:Name="NewAlbumCancel">cancel</Button>
+            </DockPanel>
+            
+        </StackPanel>
+    </Border>
 </Window>

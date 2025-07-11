@@ -10,18 +10,7 @@
         WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
-        <Style TargetType="Label">
-            <!-- Implicit style that sets all padding for Label-->
-            <Setter Property="Padding"  Value="0,5,5,1" />
-        </Style>
-        <Style x:Key="BottomSpacerMargin">
-            <Setter Property="Control.Margin" Value="0,0,0,10" />
-            <!-- Qualify the property [Margin] with a class name [Property="ClassName.Property"]-->
-        </Style>
-        <Style x:Key="DataGridOverflowEllipse" TargetType="{x:Type TextBlock}">
-            <!-- Sets the textOverflow property for datagrids to ellipses -->
-            <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
-        </Style>
+
     </Window.Resources>
 
 
