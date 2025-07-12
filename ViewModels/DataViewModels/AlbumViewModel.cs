@@ -6,7 +6,7 @@ namespace MusicDbEditor.ViewModels.DataViewModels
     /// <summary>
     /// View model representing album data
     /// </summary>
-    class AlbumViewModel : BaseViewModel
+    public class AlbumViewModel : BaseViewModel
     {
         #region Properties
 

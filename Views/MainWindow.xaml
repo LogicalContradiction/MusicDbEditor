@@ -153,7 +153,8 @@
                         Margin="0,0,0,8"
                         AlternatingRowBackground="#f3f3f3"
                         AlternationCount="2"
-                        ItemsSource="{Binding Albums}">
+                        ItemsSource="{Binding Albums}"
+                        SelectedItem="{Binding Path=SelectedAlbumViewModel, Mode=TwoWay}">
 
                         <DataGrid.Columns>
                             <!-- TODO: figure out how to stop tooltip from showing if the cell is empty -->
@@ -263,13 +264,15 @@
                             x:Name="albumAddButton"
                             DockPanel.Dock="Right"
                             Margin="5,0,0,0"
-                            Command="{Binding AddEditAlbumCommand}">
+                            Command="{Binding AddAlbumCommand}">
                             add
                         </Button>
                         <Button 
                             x:Name="albumEditButton"
                             DockPanel.Dock="Right"
-                            Margin="15,0,0,0">
+                            Margin="15,0,0,0"
+                            Command="{Binding EditAlbumCommand}"
+                            CommandParameter="{Binding SelectedAlbumViewModel}">
                             edit
                         </Button>
                         <Button 

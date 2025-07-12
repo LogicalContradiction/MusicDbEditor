@@ -1,7 +1,10 @@
 ﻿
 using MusicDbEditor.Commands;
+using MusicDbEditor.ViewModels.AddEditViewModels;
 using MusicDbEditor.ViewModels.DataViewModels;
+using MusicDbEditor.Views;
 using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Input;
 
 namespace MusicDbEditor.ViewModels.TabViewModels
@@ -18,11 +21,24 @@ namespace MusicDbEditor.ViewModels.TabViewModels
         /// </summary>
         public ObservableCollection<AlbumViewModel> Albums { get; set; }
 
+        /// <summary>
+        /// The currently selected album view model.
+        /// </summary>
+        public AlbumViewModel SelectedAlbumViewModel { get; set; }
+
         #endregion
 
         #region Commands
 
-        public ICommand AddEditAlbumCommand { get; set; }
+        /// <summary>
+        /// Command to run when editing an Album.
+        /// </summary>
+        public ICommand EditAlbumCommand { get; set; }
+
+        /// <summary>
+        /// Command to run when adding an Album.
+        /// </summary>
+        public ICommand AddAlbumCommand { get; set; }
 
         #endregion
 
@@ -38,7 +54,8 @@ namespace MusicDbEditor.ViewModels.TabViewModels
             // put the data in this viewmodel
             this.Albums = new ObservableCollection<AlbumViewModel>(data);
 
-            AddEditAlbumCommand = new AddEditAlbumCommand();
+            EditAlbumCommand = new RelayCommandConditional(OpenEditWindow);
+            AddAlbumCommand = new RelayCommand(OpenAddWindow);
         
         }
 
@@ -46,9 +63,37 @@ namespace MusicDbEditor.ViewModels.TabViewModels
 
         #region Helper Methods
 
-        private void OpenAddEditWindow()
+        /// <summary>
+        /// Opens the AddEdit window for Album.
+        /// </summary>
+        /// <param name="albumViewModel">The current selected album if editing.
+        /// Null if a new album.</param>
+        private void OpenAddEditWindow(AlbumViewModel albumViewModel)
         {
+            // Create the add/edit window
+            Window window = new AlbumAddEditWindow();
 
+            // Set the data context
+            window.DataContext = new AlbumAddEditViewModel(albumViewModel);
+
+            // Show the window
+            window.Show();
+        }
+
+        /// <summary>
+        /// Sets the album for the AddEditWindow to be the currently selected album.
+        /// </summary>
+        private void OpenAddWindow()
+        {
+            OpenAddEditWindow(null);
+        }
+
+        /// <summary>
+        /// Sets the album for the AddEditWindow to null (to add a new album).
+        /// </summary>
+        private void OpenEditWindow()
+        {
+            OpenAddEditWindow(SelectedAlbumViewModel);
         }
 
         #endregion
