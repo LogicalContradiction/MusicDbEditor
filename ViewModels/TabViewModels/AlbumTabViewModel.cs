@@ -4,6 +4,7 @@ using MusicDbEditor.ViewModels.AddEditViewModels;
 using MusicDbEditor.ViewModels.DataViewModels;
 using MusicDbEditor.Views;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
 
@@ -12,8 +13,15 @@ namespace MusicDbEditor.ViewModels.TabViewModels
     /// <summary>
     /// View model to represent the album tab
     /// </summary>
-    class AlbumTabViewModel
+    class AlbumTabViewModel : INotifyPropertyChanged
     {
+        #region Interface Methods
+
+        public event PropertyChangedEventHandler PropertyChanged = (sender, e) => { };
+
+        #endregion
+
+
         #region Properties
 
         /// <summary>
@@ -22,9 +30,29 @@ namespace MusicDbEditor.ViewModels.TabViewModels
         public ObservableCollection<AlbumViewModel> Albums { get; set; }
 
         /// <summary>
+        /// Private backing field for SelectedAlbumViewModel.
+        /// </summary>
+        private AlbumViewModel _album;
+
+        /// <summary>
         /// The currently selected album view model.
         /// </summary>
-        public AlbumViewModel SelectedAlbumViewModel { get; set; }
+        public AlbumViewModel SelectedAlbumViewModel 
+        {
+            get 
+            {
+                return _album;
+            }
+
+            set
+            {
+                // new value is the same as old. No need to change it.
+                if (value == _album) return;
+                
+                this._album = value;
+                this.PropertyChanged(this, new PropertyChangedEventArgs(nameof(SelectedAlbumViewModel)));
+            }
+        }
 
         #endregion
 
@@ -71,10 +99,10 @@ namespace MusicDbEditor.ViewModels.TabViewModels
         private void OpenAddEditWindow(AlbumViewModel albumViewModel)
         {
             // Create the add/edit window
-            Window window = new AlbumAddEditWindow();
+            Window window = new AlbumAddEditWindow(albumViewModel);
 
             // Set the data context
-            window.DataContext = new AlbumAddEditViewModel(albumViewModel);
+            //window.DataContext = new AlbumAddEditViewModel(albumViewModel);
 
             // Show the window
             window.Show();

@@ -1,13 +1,20 @@
 ﻿
 using MusicDbEditor.Models;
+using System.ComponentModel;
 
 namespace MusicDbEditor.ViewModels.DataViewModels
 {
     /// <summary>
     /// View model representing album data
     /// </summary>
-    public class AlbumViewModel : BaseViewModel
+    public class AlbumViewModel : INotifyPropertyChanged
     {
+        #region Interface Methods
+
+        public event PropertyChangedEventHandler PropertyChanged = (sender, e) => { };
+
+        #endregion
+
         #region Properties
 
         /// <summary>

@@ -1,12 +1,19 @@
 ﻿using MusicDbEditor.Models;
+using System.ComponentModel;
 
 namespace MusicDbEditor.ViewModels.DataViewModels
 {
     /// <summary>
     /// View model representing track data
     /// </summary>
-    internal class TrackViewModel : BaseViewModel
+    internal class TrackViewModel : INotifyPropertyChanged
     {
+        #region Interface Methods
+
+        public event PropertyChangedEventHandler PropertyChanged = (sender, e) => { };
+
+        #endregion
+
         #region Properties
 
         /// <summary>

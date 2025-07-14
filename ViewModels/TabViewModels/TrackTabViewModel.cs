@@ -1,19 +1,32 @@
 ﻿using System.Collections.ObjectModel;
 using MusicDbEditor.ViewModels.DataViewModels;
 using System.Windows.Input;
+using System.ComponentModel;
 
 namespace MusicDbEditor.ViewModels.TabViewModels
 {
-    internal class TrackTabViewModel : BaseViewModel
+    internal class TrackTabViewModel : INotifyPropertyChanged
     {
+        #region Interface Methods
+
+        public event PropertyChangedEventHandler PropertyChanged = (sender, e) => { };
+
+        #endregion
+
+        #region Properties
+
         /// <summary>
         /// The collection of tracks shown to the user.
         /// </summary>
         public ObservableCollection<TrackViewModel> Tracks { get; set; }
 
+        #endregion
+
+        #region Commands
+
         public ICommand GetTrackDataCommand { get; set; }
 
-
+        #endregion
 
 
 

@@ -41,7 +41,10 @@
             <!-- Buttons panel -->
             <DockPanel LastChildFill="False" Margin="0,5,0,0">
                 <Button DockPanel.Dock="Right" Margin="5,0,0,0" x:Name="NewAlbumAddConfirm">add</Button>
-                <Button DockPanel.Dock="Right" x:Name="NewAlbumCancel">cancel</Button>
+                <Button 
+                    DockPanel.Dock="Right" 
+                    x:Name="NewAlbumCancel"
+                    Command="{Binding CloseWindowCommand}">cancel</Button>
             </DockPanel>
             
         </StackPanel>
