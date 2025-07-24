@@ -2,6 +2,7 @@
 using MusicDbEditor.ViewModels.DataViewModels;
 using System.Windows.Input;
 using System.ComponentModel;
+using MusicDbEditor.Services;
 
 namespace MusicDbEditor.ViewModels.TabViewModels
 {

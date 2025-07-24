@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace MusicDbEditor
+namespace MusicDbEditor.Services
 {
     
     internal class DataConnection

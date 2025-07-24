@@ -1,4 +1,5 @@
-﻿using MusicDbEditor.ViewModels.TabViewModels;
+﻿using MusicDbEditor.Services;
+using MusicDbEditor.ViewModels.TabViewModels;
 using System.Windows;
 
 namespace MusicDbEditor.Views
@@ -12,9 +13,12 @@ namespace MusicDbEditor.Views
         {
             InitializeComponent();
 
+            // Create window manager
+            WindowManagerInterface windowManager = new WindowManager();
+
             // Bind the view models to the tabs
             trackTab.DataContext = new TrackTabViewModel();
-            albumTab.DataContext = new AlbumTabViewModel();
+            albumTab.DataContext = new AlbumTabViewModel(windowManager);
         }
     }
 }

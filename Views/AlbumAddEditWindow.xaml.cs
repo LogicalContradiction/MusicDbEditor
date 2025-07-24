@@ -20,10 +20,6 @@ namespace MusicDbEditor.Views
         public AlbumAddEditWindow(AlbumViewModel album)
         {
             InitializeComponent();
-
-            // Make the datacontext
-            this.DataContext = new AlbumAddEditViewModel(album, CloseWindow);
-
         }
 
         #endregion
@@ -33,7 +29,7 @@ namespace MusicDbEditor.Views
         /// <summary>
         /// Closes the window.
         /// </summary>
-        private void CloseWindow()
+        public void CloseWindow()
         {
             this.Close();
         }
