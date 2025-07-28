@@ -1,8 +1,7 @@
 ﻿<Application x:Class="MusicDbEditor.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:MusicDbEditor"
-             StartupUri="/Views/MainWindow.xaml">
+             xmlns:local="clr-namespace:MusicDbEditor">
     <Application.Resources>
         <Style TargetType="Label">
             <!-- Implicit style that sets all padding for Label-->

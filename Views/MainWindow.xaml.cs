@@ -1,4 +1,5 @@
-﻿using MusicDbEditor.Services;
+﻿using Microsoft.Extensions.DependencyInjection;
+using MusicDbEditor.Services;
 using MusicDbEditor.ViewModels.TabViewModels;
 using System.Windows;
 
@@ -9,16 +10,16 @@ namespace MusicDbEditor.Views
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        public MainWindow(ServiceProvider serviceProvider)
         {
             InitializeComponent();
 
             // Create window manager
-            WindowManagerInterface windowManager = new WindowManager();
+            //WindowManagerInterface windowManager = new WindowManager();
 
             // Bind the view models to the tabs
-            trackTab.DataContext = new TrackTabViewModel();
-            albumTab.DataContext = new AlbumTabViewModel(windowManager);
+            trackTab.DataContext = new TrackTabViewModel(serviceProvider);
+            albumTab.DataContext = new AlbumTabViewModel(serviceProvider);
         }
     }
 }

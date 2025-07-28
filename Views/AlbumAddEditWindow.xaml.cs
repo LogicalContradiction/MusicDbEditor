@@ -24,17 +24,5 @@ namespace MusicDbEditor.Views
 
         #endregion
 
-        #region Helper Methods
-
-        /// <summary>
-        /// Closes the window.
-        /// </summary>
-        public void CloseWindow()
-        {
-            this.Close();
-        }
-
-        #endregion
-
     }
 }

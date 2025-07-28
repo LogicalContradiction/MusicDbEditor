@@ -13,13 +13,13 @@ using System.Windows;
 namespace MusicDbEditor.Services
 {
     
-    internal class DataConnection
+    internal class DataConnection : DataConnectionInterface
     {
         #region Properties
         /// <summary>
         /// Singleton instance
         /// </summary>
-        public static DataConnection Instance { get; } = new DataConnection();
+        //public static DataConnection Instance { get; } = new DataConnection();
 
         /// <summary>
         /// Path the the SQLite database.
@@ -42,7 +42,7 @@ namespace MusicDbEditor.Services
         /// <summary>
         /// Private singleton constructor.
         /// </summary>
-        private DataConnection()
+        public DataConnection()
         {
             DataSource = @"tests/testDB.db";
             Mode = SqliteOpenMode.ReadOnly; 
@@ -56,7 +56,7 @@ namespace MusicDbEditor.Services
         /// <summary>
         /// Static accessor for singleton.
         /// </summary>
-        static DataConnection() { }
+        //static DataConnection() { }
 
         #endregion 
 
@@ -82,7 +82,7 @@ namespace MusicDbEditor.Services
         /// Queries the database for track info. Also left joins on album and source media to get their names
         /// </summary>
         /// <returns>A list of Track objects representing the tracks in the database</returns>
-        internal List<Track> GetTrackData()
+        public List<Track> GetTrackData()
         {
             List<Track> result = new List<Track>();
 
@@ -132,7 +132,7 @@ namespace MusicDbEditor.Services
         /// Queries the database for album information
         /// </summary>
         /// <returns>A list of Album objects representing the albums in the database</returns>
-        internal List<Album> GetAlbumData()
+        public List<Album> GetAlbumData()
         {
             List<Album> result = new List<Album>();
 
@@ -176,6 +176,50 @@ namespace MusicDbEditor.Services
 
         }
 
+
+        #endregion
+
+        #region Insert Data Methods
+
+        /// <summary>
+        /// Inserts a row into the Album table with the provided info.
+        /// </summary>
+        /// <param name="album">The album data that is being inserted.</param>
+        public void InsertAlbum(Album album)
+        {
+            try
+            {
+                // open db connection
+                using (var connection = new SqliteConnection(ConnectionString.ToString()))
+                {
+                    connection.Open();
+
+                    // create and execute the insertion
+                    var command = connection.CreateCommand();
+                    command.CommandText =
+                        @"
+                            INSERT INTO
+                                album
+                            VALUES
+                                (@name, @sortName, @databaseLink, @purchaseLink);
+                        ";
+
+                    // bind the values to the parameters
+                    command.Parameters.AddWithValue("@name", album.Name);
+                    command.Parameters.AddWithValue("@sortName", album.SortName);
+                    command.Parameters.AddWithValue("@databaseLink", album.DatabaseLink);
+                    command.Parameters.AddWithValue("@purchaseLink", album.PurchaseLink);
+
+                    // execute statement
+                    var numRowInserted = command.ExecuteNonQuery();
+                }
+            }
+            catch (SqliteException e)
+            {
+                MessageBox.Show($"There was an error inserting the row.\nError text:\n{e}");
+            }
+
+        }
 
         #endregion
     }

@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.Extensions.DependencyInjection;
 using MusicDbEditor.Commands;
 using MusicDbEditor.Services;
 using MusicDbEditor.ViewModels.AddEditViewModels;
@@ -75,16 +76,20 @@ namespace MusicDbEditor.ViewModels.TabViewModels
         /// <summary>
         /// Constructor.
         /// </summary>
-        public AlbumTabViewModel(WindowManagerInterface windowManager)
+        public AlbumTabViewModel(ServiceProvider serviceProvider)
         {
             // get the data from the DataConnection and put them into viewmodels
-            var data = DataConnection.Instance.GetAlbumData().Select(album => new AlbumViewModel(album));
+            var dataService = serviceProvider.GetService<DataConnectionInterface>();
+            var data = dataService.GetAlbumData().Select(album => new AlbumViewModel(album));
 
             // put the data in this viewmodel
             this.Albums = new ObservableCollection<AlbumViewModel>(data);
 
-            EditAlbumCommand = new RelayCommandConditional(() => { windowManager.OpenEditWindow(SelectedAlbumViewModel); });
-            AddAlbumCommand = new RelayCommand(() => { windowManager.OpenAddWindow(); });
+            // get the windowmanager
+            var windowManager = serviceProvider.GetService<WindowManagerInterface>();
+
+            EditAlbumCommand = new RelayCommandConditional(() => { windowManager.OpenEditAlbumWindow(SelectedAlbumViewModel); });
+            AddAlbumCommand = new RelayCommand(() => { windowManager.OpenAddAlbumWindow(); });
 
         
         }

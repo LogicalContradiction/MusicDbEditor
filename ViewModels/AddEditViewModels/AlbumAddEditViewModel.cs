@@ -1,5 +1,7 @@
-﻿using MusicDbEditor.Commands;
+﻿using Microsoft.Extensions.DependencyInjection;
+using MusicDbEditor.Commands;
 using MusicDbEditor.Models;
+using MusicDbEditor.Services;
 using MusicDbEditor.ViewModels.DataViewModels;
 using System.Windows;
 using System.Windows.Input;
@@ -47,6 +49,8 @@ namespace MusicDbEditor.ViewModels.AddEditViewModels
         /// </summary>
         public ICommand CloseWindowCommand { get; set; }
 
+        public ICommand AddEditRowCommand { get; set; }
+
         #endregion
 
         #region Constructor
@@ -71,8 +75,33 @@ namespace MusicDbEditor.ViewModels.AddEditViewModels
             }
 
             CloseWindowCommand = new RelayCommand(closeAction);
+            //AddEditRowCommand = new RelayCommand(() => { AddEditRow(closeAction); });
 
 
+        }
+
+        #endregion
+
+        #region Helper Methods
+
+        public void AddEditRow(Action closeAction, ServiceProvider serviceProvider)
+        {
+            // get the data connection
+            //var conn = DataConnection.Instance;
+            var dataService = serviceProvider.GetService<DataConnectionInterface>();
+
+            // Album already exists, so user wants to edit album
+            // if (Album != null) conn.EditAlbum(Album);
+            // otherwise user wanted to add a new album
+            // else 
+            dataService.InsertAlbum(new Album
+            {
+                Name = NameEdit,
+                SortName = SortNameEdit,
+                DatabaseLink = DatabaseLinkEdit,
+                PurchaseLink = PurchaseLinkEdit
+            });
+            closeAction();
         }
 
         #endregion

@@ -10,12 +10,12 @@ namespace MusicDbEditor.Services
     {
         #region Album Methods
 
-        public void OpenAddWindow()
+        public void OpenAddAlbumWindow()
         {
             OpenAddEditWindow(null);
         }
 
-        public void OpenEditWindow(AlbumViewModel albumViewModel)
+        public void OpenEditAlbumWindow(AlbumViewModel albumViewModel)
         {
             OpenAddEditWindow(albumViewModel);
         }
