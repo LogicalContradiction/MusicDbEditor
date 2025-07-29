@@ -185,7 +185,8 @@ namespace MusicDbEditor.Services
         /// Inserts a row into the Album table with the provided info.
         /// </summary>
         /// <param name="album">The album data that is being inserted.</param>
-        public void InsertAlbum(Album album)
+        /// <returns>The album that was inserted if successful. Null otherwise</returns>
+        public Album InsertAlbum(Album album)
         {
             try
             {
@@ -212,13 +213,14 @@ namespace MusicDbEditor.Services
 
                     // execute statement
                     var numRowInserted = command.ExecuteNonQuery();
+                    return album;
                 }
             }
             catch (SqliteException e)
             {
                 MessageBox.Show($"There was an error inserting the row.\nError text:\n{e}");
             }
-
+            return null;
         }
 
         #endregion

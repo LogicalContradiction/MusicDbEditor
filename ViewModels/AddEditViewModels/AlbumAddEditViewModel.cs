@@ -58,9 +58,10 @@ namespace MusicDbEditor.ViewModels.AddEditViewModels
         /// <summary>
         /// Constructor.
         /// </summary>
-        /// <param name="album">The album that is being edited.
-        /// Null if a new album is being created.</param>
-        public AlbumAddEditViewModel(AlbumViewModel album, Action closeAction) 
+        /// <param name="album">The album that is being edited. Null if a new album is being created.</param>
+        /// <param name="closeAction">An action to be used to close the window at the end.</param>
+        /// <param name="serviceProvider">The service provider to get a needed service.</param>
+        public AlbumAddEditViewModel(AlbumViewModel album, Action closeAction, ServiceProvider serviceProvider) 
         { 
             if (album != null)
             {
@@ -84,7 +85,13 @@ namespace MusicDbEditor.ViewModels.AddEditViewModels
 
         #region Helper Methods
 
-        public void AddEditRow(Action closeAction, ServiceProvider serviceProvider)
+        /// <summary>
+        /// Helper method to call data service to insert a new album or edit an existing album in the database.
+        /// </summary>
+        /// <param name="closeAction">Action to close the window after the insert/edit is complete.</param>
+        /// <param name="serviceProvider">The service provider to get the data service from.</param>
+        /// <returns>If successful, the album inserted, otherwise null.</returns>
+        public Album AddEditRow(Action closeAction, IServiceProvider serviceProvider)
         {
             // get the data connection
             //var conn = DataConnection.Instance;
@@ -94,7 +101,7 @@ namespace MusicDbEditor.ViewModels.AddEditViewModels
             // if (Album != null) conn.EditAlbum(Album);
             // otherwise user wanted to add a new album
             // else 
-            dataService.InsertAlbum(new Album
+            Album insertedAlbum = dataService.InsertAlbum(new Album
             {
                 Name = NameEdit,
                 SortName = SortNameEdit,
@@ -102,6 +109,7 @@ namespace MusicDbEditor.ViewModels.AddEditViewModels
                 PurchaseLink = PurchaseLinkEdit
             });
             closeAction();
+            return insertedAlbum;
         }
 
         #endregion

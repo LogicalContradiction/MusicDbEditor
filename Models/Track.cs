@@ -9,7 +9,7 @@ namespace MusicDbEditor.Models
     /// <summary>
     /// Represents info needed to display in Track tab
     /// </summary>
-    class Track
+    internal class Track
     {
 
         #region Properties

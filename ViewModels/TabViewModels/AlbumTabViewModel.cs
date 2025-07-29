@@ -76,6 +76,7 @@ namespace MusicDbEditor.ViewModels.TabViewModels
         /// <summary>
         /// Constructor.
         /// </summary>
+        /// <param name="serviceProvider">Service provider used to get any needed service.</param>
         public AlbumTabViewModel(ServiceProvider serviceProvider)
         {
             // get the data from the DataConnection and put them into viewmodels
@@ -88,8 +89,8 @@ namespace MusicDbEditor.ViewModels.TabViewModels
             // get the windowmanager
             var windowManager = serviceProvider.GetService<WindowManagerInterface>();
 
-            EditAlbumCommand = new RelayCommandConditional(() => { windowManager.OpenEditAlbumWindow(SelectedAlbumViewModel); });
-            AddAlbumCommand = new RelayCommand(() => { windowManager.OpenAddAlbumWindow(); });
+            EditAlbumCommand = new RelayCommandConditional(() => { windowManager.OpenEditAlbumWindow(SelectedAlbumViewModel, serviceProvider); });
+            AddAlbumCommand = new RelayCommand(() => { windowManager.OpenAddAlbumWindow(serviceProvider); });
 
         
         }

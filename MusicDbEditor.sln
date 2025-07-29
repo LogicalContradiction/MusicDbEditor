@@ -5,7 +5,7 @@ VisualStudioVersion = 17.12.35521.163
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicDbEditor", "MusicDbEditor.csproj", "{447A70AD-0A6C-4B17-89EC-D121A137702B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicDbEdiitorTests", "..\MusicDbEdiitorTests\MusicDbEdiitorTests.csproj", "{70361051-CEAD-4F0E-AE56-38F00F6458C7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicDbEditorTests", "..\MusicDbEditorTests\MusicDbEditorTests.csproj", "{8588F312-98D7-4EC3-A1C6-440D5ED560E5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{447A70AD-0A6C-4B17-89EC-D121A137702B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{447A70AD-0A6C-4B17-89EC-D121A137702B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{447A70AD-0A6C-4B17-89EC-D121A137702B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{70361051-CEAD-4F0E-AE56-38F00F6458C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{70361051-CEAD-4F0E-AE56-38F00F6458C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{70361051-CEAD-4F0E-AE56-38F00F6458C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{70361051-CEAD-4F0E-AE56-38F00F6458C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8588F312-98D7-4EC3-A1C6-440D5ED560E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8588F312-98D7-4EC3-A1C6-440D5ED560E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8588F312-98D7-4EC3-A1C6-440D5ED560E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8588F312-98D7-4EC3-A1C6-440D5ED560E5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

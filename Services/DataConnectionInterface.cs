@@ -9,7 +9,7 @@ namespace MusicDbEditor.Services
 
         public List<Album> GetAlbumData();
 
-        public void InsertAlbum(Album album);
+        public Album InsertAlbum(Album album);
 
     }
 }

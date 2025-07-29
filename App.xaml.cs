@@ -1,8 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using MusicDbEditor.Services;
 using MusicDbEditor.Views;
-using System.Configuration;
-using System.Data;
 using System.Windows;
 
 namespace MusicDbEditor
