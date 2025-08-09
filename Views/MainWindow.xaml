@@ -162,7 +162,7 @@
                             <DataGridTextColumn 
                                 Header="Name"
                                 Width="*"
-                                ElementStyle="{StaticResource DataGridOverflowEllipse}"
+                                ElementStyle="{StaticResource DataGridCellStyle}"
                                 Binding="{Binding Name}">
                                 <DataGridTextColumn.CellStyle>
                                     <Style TargetType="DataGridCell">
@@ -179,7 +179,7 @@
                             <DataGridTextColumn 
                                 Header="Sort Name"
                                 Width="*"
-                                ElementStyle="{StaticResource DataGridOverflowEllipse}"
+                                ElementStyle="{StaticResource DataGridCellStyle}"
                                 Binding="{Binding SortName}">
                                 <DataGridTextColumn.CellStyle>
                                     <Style TargetType="DataGridCell">
@@ -196,7 +196,7 @@
                             <DataGridTextColumn 
                                 Header="Database Link"
                                 Width="*"
-                                ElementStyle="{StaticResource DataGridOverflowEllipse}"
+                                ElementStyle="{StaticResource DataGridCellStyle}"
                                 Binding="{Binding DatabaseLink}">
                                 <DataGridTextColumn.CellStyle>
                                     <Style TargetType="DataGridCell">
@@ -213,7 +213,7 @@
                             <DataGridTextColumn 
                                 Header="Purchase Link"
                                 Width="*"
-                                ElementStyle="{StaticResource DataGridOverflowEllipse}"
+                                ElementStyle="{StaticResource DataGridCellStyle}"
                                 Binding="{Binding PurchaseLink}">
                                 <DataGridTextColumn.CellStyle>
                                     <Style TargetType="DataGridCell">

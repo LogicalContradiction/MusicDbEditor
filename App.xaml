@@ -11,9 +11,10 @@
             <Setter Property="Control.Margin" Value="0,0,0,10" />
             <!-- Qualify the property [Margin] with a class name [Property="ClassName.Property"]-->
         </Style>
-        <Style x:Key="DataGridOverflowEllipse" TargetType="{x:Type TextBlock}">
+        <Style x:Key="DataGridCellStyle" TargetType="{x:Type TextBlock}">
             <!-- Sets the textOverflow property for datagrids to ellipses -->
             <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+            <Setter Property="Margin" Value="5,1,5,1"/>
         </Style>
     </Application.Resources>
 </Application>

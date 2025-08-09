@@ -11,14 +11,16 @@ namespace MusicDbEditor.Services
     {
         #region Album Methods
 
-        public void OpenAddAlbumWindow(ServiceProvider serviceProvider)
+        public bool OpenAddAlbumWindow(ServiceProvider serviceProvider)
         {
             OpenAddEditWindow(null, serviceProvider);
+            return true;
         }
 
-        public void OpenEditAlbumWindow(AlbumViewModel albumViewModel, ServiceProvider serviceProvider)
+        public bool OpenEditAlbumWindow(AlbumViewModel albumViewModel, ServiceProvider serviceProvider)
         {
             OpenAddEditWindow(albumViewModel, serviceProvider);
+            return true;
         }
 
         #region Private Album Helper Methods
