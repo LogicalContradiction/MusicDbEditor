@@ -20,8 +20,8 @@
         Margin="0,0,0,8"
         AlternatingRowBackground="#f3f3f3"
         AlternationCount="2"
-        ItemsSource="{Binding Albums}"
-        SelectedItem="{Binding Path=SelectedAlbumViewModel, Mode=TwoWay}"> <!-- TODO: CHANGE THIS -->
+        ItemsSource="{Binding SourceMedias}"
+        SelectedItem="{Binding Path=SelectedSourceMediaViewModel, Mode=TwoWay}">
             <DataGrid.Columns>
                 <!-- Name col -->
                 <DataGridTextColumn 
@@ -82,23 +82,23 @@
         <!-- Buttons to add/edit/delete entries -->
         <DockPanel LastChildFill="False">
             <Button 
-            x:Name="albumAddButton"
+            x:Name="sourceMediaAddButton"
             DockPanel.Dock="Right"
             Margin="5,0,0,0"
-            Command="{Binding AddAlbumCommand}"> <!-- TODO: CHANGE THIS -->
+            Command="{Binding AddSourceMediaCommand}">
                 add
             </Button>
             <Button 
-            x:Name="albumEditButton"
+            x:Name="sourceMediaEditButton"
             DockPanel.Dock="Right"
             Margin="15,0,0,0"
-            Command="{Binding EditAlbumCommand}" 
-            CommandParameter="{Binding SelectedAlbumViewModel}"> <!-- TODO: CHANGE THIS -->
+            Command="{Binding EditSourceMediaCommand}" 
+            CommandParameter="{Binding SelectedSourceMediaViewModel}">
                 edit
             </Button>
             <Button 
-            x:Name="albumDeleteButton"
-            DockPanel.Dock="Right"> <!-- TODO: CHANGE THIS -->
+            x:Name="sourceMediaDeleteButton"
+            DockPanel.Dock="Right">
                 delete
             </Button>
 

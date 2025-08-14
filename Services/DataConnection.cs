@@ -76,7 +76,7 @@ namespace MusicDbEditor.Services
 
         #endregion
 
-        #region Data Retrieveal Methods
+        #region Track Methods
 
         /// <summary>
         /// Queries the database for track info. Also left joins on album and source media to get their names
@@ -128,6 +128,10 @@ namespace MusicDbEditor.Services
             return result;
         }
 
+        #endregion
+
+        #region Album Methods
+
         /// <summary>
         /// Queries the database for album information
         /// </summary>
@@ -176,11 +180,6 @@ namespace MusicDbEditor.Services
 
         }
 
-
-        #endregion
-
-        #region Insert Data Methods
-
         /// <summary>
         /// Inserts a row into the Album table with the provided info.
         /// </summary>
@@ -221,6 +220,51 @@ namespace MusicDbEditor.Services
                 MessageBox.Show($"There was an error inserting the row.\nError text:\n{e}");
             }
             return null;
+        }
+
+        #endregion
+
+        #region Source Media Methods
+
+        public List<SourceMedia> GetSourceMediaData()
+        {
+            List<SourceMedia> result = new List<SourceMedia>();
+
+            try
+            {
+                // open connection to db
+                using (var connection = new SqliteConnection(ConnectionString.ToString()))
+                {
+                    connection.Open();
+
+                    // create and execute the query
+                    var command = connection.CreateCommand();
+                    command.CommandText =
+                        @"
+                            SELECT
+                                id, name, sort_name
+                            FROM source_media;";
+
+                    // read the results into objects and put them into a list
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            result.Add(new SourceMedia()
+                            {
+                                Id = reader.GetInt32(0),
+                                Name = reader.GetString(1),
+                                SortName = reader.GetString(2),
+                            });
+                        }
+                    }
+                }
+            }
+            catch (SqliteException e) 
+            {
+                MessageBox.Show($"There was an error inserting the row.\nError text:\n{e}");
+            }
+            return result;
         }
 
         #endregion

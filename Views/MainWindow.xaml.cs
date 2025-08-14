@@ -20,6 +20,7 @@ namespace MusicDbEditor.Views
             // Bind the view models to the tabs
             trackTab.DataContext = new TrackTabViewModel(serviceProvider);
             albumTab.DataContext = new AlbumTabViewModel(serviceProvider);
+            sourceMediaTab.DataContext = new SourceMediaTabViewModel(serviceProvider);
         }
     }
 }

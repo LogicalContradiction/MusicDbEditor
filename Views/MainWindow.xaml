@@ -288,8 +288,8 @@
                 </StackPanel>
             </TabItem>
 
-            <TabItem Header="Sources">
-                <uc:SourcesTabUserControl/>
+            <TabItem x:Name="sourceMediaTab" Header="Sources">
+                <uc:SourcesTabUserControl />
             </TabItem>
             <TabItem Header="Tags" />
             <TabItem Header="Tag Categories" />

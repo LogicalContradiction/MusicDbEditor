@@ -8,10 +8,15 @@ namespace MusicDbEditor.Models
 {
     internal class SourceMedia
     {
+        #region Properties
+
         public int Id { get; set; }
         public string Name { get; set; }
         public string SortName { get; set; }
 
+        #endregion
+
+        #region Constructors
 
         public SourceMedia(int id, string name, string sortName)
         {
@@ -19,6 +24,10 @@ namespace MusicDbEditor.Models
             Name = name;
             SortName = sortName;
         }
+
+        public SourceMedia() { }
+
+        #endregion
 
 
 
