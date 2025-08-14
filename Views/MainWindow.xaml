@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:dntk="clr-namespace:Xceed.Wpf.Toolkit;assembly=DotNetProjects.Wpf.Extended.Toolkit"
+        xmlns:uc="clr-namespace:MusicDbEditor.Views.TabUserControl"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MusicDbEditor"
         mc:Ignorable="d"
@@ -286,8 +287,10 @@
 
                 </StackPanel>
             </TabItem>
-            
-            <TabItem Header="Sources" />
+
+            <TabItem Header="Sources">
+                <uc:SourcesTabUserControl/>
+            </TabItem>
             <TabItem Header="Tags" />
             <TabItem Header="Tag Categories" />
             <TabItem Header="Track Tags" />
