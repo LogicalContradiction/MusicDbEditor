@@ -27,6 +27,25 @@ namespace MusicDbEditor.Services
 
         #endregion
 
+        #region Source Media Methods
+
+        /// <summary>
+        /// Opens a window to add a new source media.
+        /// </summary>
+        /// <param name="serviceProvider"></param>
+        /// <returns></returns>
+        public bool OpenAddSourceMediaWindow(ServiceProvider serviceProvider);
+
+        /// <summary>
+        /// Opens a window to edit an existing source media info.
+        /// </summary>
+        /// <param name="sourceMediaViewModel">The Source Media whose data is being edited.</param>
+        /// <param name="serviceProvider">The service provider to be used by the view model.</param>
+        /// <returns></returns>
+        public bool OpenEditSourceMediaWindow(SourceMediaViewModel sourceMediaViewModel, ServiceProvider serviceProvider);
+
+        #endregion
+
 
 
 

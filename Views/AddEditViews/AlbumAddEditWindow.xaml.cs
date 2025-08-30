@@ -3,7 +3,7 @@ using MusicDbEditor.ViewModels.AddEditViewModels;
 using MusicDbEditor.ViewModels.DataViewModels;
 using System.Windows;
 
-namespace MusicDbEditor.Views
+namespace MusicDbEditor.Views.AddEditViews
 {
     /// <summary>
     /// Interaction logic for AlbumAddEditWindow.xaml

@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace MusicDbEditor.ViewModels.DataViewModels
 {
-    class SourceMediaViewModel : INotifyPropertyChanged
+    public class SourceMediaViewModel : INotifyPropertyChanged
     {
         #region Interface Methods
 

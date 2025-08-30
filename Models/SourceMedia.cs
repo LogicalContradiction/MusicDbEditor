@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MusicDbEditor.Models
 {
-    internal class SourceMedia
+    public class SourceMedia
     {
         #region Properties
 

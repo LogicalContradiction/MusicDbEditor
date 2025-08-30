@@ -73,8 +73,8 @@ namespace MusicDbEditor.ViewModels.TabViewModels
             // get the window manager
             var windowManager = serviceProvider.GetService<WindowManagerInterface>();
 
-            //EditSourceMediaCommand = new RelayCommandConditional(() => { windowManager.OpenEditSourceMediaWindow(SelectedSourceMediaViewModel, serviceProvider); });
-            //AddSourceMediaCommand = new RelayCommand(() => { windowManager.OpenAddSourceMediaWindow(serviceProvider); });
+            EditSourceMediaCommand = new RelayCommandConditional(() => { windowManager.OpenEditSourceMediaWindow(SelectedSourceMediaViewModel, serviceProvider); });
+            AddSourceMediaCommand = new RelayCommand(() => { windowManager.OpenAddSourceMediaWindow(serviceProvider); });
 
         }
 
