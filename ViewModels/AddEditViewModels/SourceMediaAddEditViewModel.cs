@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using MusicDbEditor.Commands;
+using MusicDbEditor.Models;
+using MusicDbEditor.Services;
 using MusicDbEditor.ViewModels.DataViewModels;
 using System.Windows.Input;
 
@@ -71,6 +73,33 @@ namespace MusicDbEditor.ViewModels.AddEditViewModels
 
         #endregion
 
+        #region Helper Methods
+
+        /// <summary>
+        /// Helper method to call data service to insert a new Source Media or edit an existing one.
+        /// </summary>
+        /// <param name="closeAction">Action to close the window after insert/edit is complete.</param>
+        /// <param name="serviceProvider">Contains the data service.</param>
+        /// <returns>The Source Media inserted if successful, else null.</returns>
+        public SourceMedia AddEditRow(Action closeAction, IServiceProvider serviceProvider)
+        {
+            // get data connection
+            var dataService = serviceProvider.GetService<DataConnectionInterface>();
+
+            // if SourceMedia isn't null, user wants to edit an existing SourceMedia
+            //if (SourceMedia != null) dataService.EditSourceMedia(SourceMedia);
+
+            // otherwise, user wants to add a new Source Media
+            SourceMedia insertedSourceMedia = dataService.InsertSourceMedia(new SourceMedia
+            {
+                Name = NameEdit,
+                SortName = SortNameEdit,
+            });
+            closeAction();
+            return insertedSourceMedia;
+        }
+
+        #endregion
 
 
     }

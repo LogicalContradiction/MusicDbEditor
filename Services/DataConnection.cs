@@ -267,6 +267,41 @@ namespace MusicDbEditor.Services
             return result;
         }
 
+        public SourceMedia InsertSourceMedia(SourceMedia sourceMedia)
+        {
+            try
+            {
+                // open db connection
+                using (var connection = new SqliteConnection(ConnectionString.ToString()))
+                {
+                    connection.Open();
+
+                    // create and execute the insertion
+                    var command = connection.CreateCommand();
+                    command.CommandText =
+                        @"
+                            INSERT INTO
+                                source_media
+                            VALUES
+                                (@name, @sortName);
+                        ";
+
+                    // bind the values to the parameters
+                    command.Parameters.AddWithValue("@name", sourceMedia.Name);
+                    command.Parameters.AddWithValue("@sortName", sourceMedia.SortName);
+
+                    // execute statement
+                    var numRowInserted = command.ExecuteNonQuery();
+                    return sourceMedia;
+                }
+            }
+            catch (SqliteException e)
+            {
+                MessageBox.Show($"There was an error inserting the row.\nError text:\n{e}");
+            }
+            return null;
+        }
+
         #endregion
     }
 }

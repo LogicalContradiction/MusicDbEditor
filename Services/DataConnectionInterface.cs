@@ -19,6 +19,8 @@ namespace MusicDbEditor.Services
 
         public List<SourceMedia> GetSourceMediaData();
 
+        public SourceMedia InsertSourceMedia(SourceMedia sourceMedia);
+
         #endregion
 
     }
