@@ -1,0 +1,155 @@
+﻿<UserControl x:Class="MusicDbEditor.Views.TabUserControl.AlbumTabUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:dntk="clr-namespace:Xceed.Wpf.Toolkit;assembly=DotNetProjects.Wpf.Extended.Toolkit"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MusicDbEditor.Views.TabUserControl"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <StackPanel Margin="15,20,15,15">
+
+        <dntk:WatermarkTextBox Margin="0,0,0,12" Watermark="Search"></dntk:WatermarkTextBox>
+
+        <DataGrid
+        AutoGenerateColumns="False"
+        IsReadOnly="True"
+        CanUserReorderColumns="False"
+        HeadersVisibility="Column"
+        Height="330"
+        Margin="0,0,0,8"
+        AlternatingRowBackground="#f3f3f3"
+        AlternationCount="2"
+        ItemsSource="{Binding Albums}"
+        SelectedItem="{Binding Path=SelectedAlbumViewModel, Mode=TwoWay}">
+
+            <DataGrid.Columns>
+                <!-- TODO: figure out how to stop tooltip from showing if the cell is empty -->
+                <!-- Name col -->
+                <DataGridTextColumn 
+                Header="Name"
+                Width="*"
+                ElementStyle="{StaticResource DataGridCellStyle}"
+                Binding="{Binding Name}">
+                    <DataGridTextColumn.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <!-- Trigger to only display tooltip if the cell has text -->
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding HasName}" Value="True">
+                                    <Setter Property="ToolTip" Value="{Binding Name}"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
+                <!-- Sort Name col-->
+                <DataGridTextColumn 
+                Header="Sort Name"
+                Width="*"
+                ElementStyle="{StaticResource DataGridCellStyle}"
+                Binding="{Binding SortName}">
+                    <DataGridTextColumn.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <!-- Trigger to only display tooltip if the cell has text -->
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding HasSortName}" Value="True">
+                                    <Setter Property="ToolTip" Value="{Binding SortName}"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
+                <!-- Database Link col-->
+                <DataGridTextColumn 
+                Header="Database Link"
+                Width="*"
+                ElementStyle="{StaticResource DataGridCellStyle}"
+                Binding="{Binding DatabaseLink}">
+                    <DataGridTextColumn.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <!-- Trigger to only display tooltip if the cell has text -->
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding HasDatabaseLink}" Value="True">
+                                    <Setter Property="ToolTip" Value="{Binding DatabaseLink}"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
+                <!-- Purchase Link col -->
+                <DataGridTextColumn 
+                Header="Purchase Link"
+                Width="*"
+                ElementStyle="{StaticResource DataGridCellStyle}"
+                Binding="{Binding PurchaseLink}">
+                    <DataGridTextColumn.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <!-- Trigger to only display tooltip if the cell has text -->
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding HasPurchaseLink}" Value="True">
+                                    <Setter Property="ToolTip" Value="{Binding PurchaseLink}"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
+            </DataGrid.Columns>
+            <!-- Album full info section that appears when clicking on a row -->
+            <DataGrid.RowDetailsTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical" Margin="10,5,10,8">
+                        <!-- Name -->
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Name:" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                            <TextBlock Text="{Binding Name}"/>
+                        </StackPanel>
+                        <!-- Sort Name -->
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Sort Name:" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                            <TextBlock Text="{Binding SortName}"/>
+                        </StackPanel>
+                        <!-- Database link -->
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Database Link:" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                            <TextBlock Text="{Binding DatabaseLink}"/>
+                        </StackPanel>
+                        <!-- Purchase Link -->
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Purchase Link:" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                            <TextBlock Text="{Binding PurchaseLink}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </DataTemplate>
+            </DataGrid.RowDetailsTemplate>
+
+
+        </DataGrid>
+
+        <!-- Buttons to add/edit/delete entries -->
+        <DockPanel LastChildFill="False">
+            <Button 
+            x:Name="albumAddButton"
+            DockPanel.Dock="Right"
+            Margin="5,0,0,0"
+            Command="{Binding AddAlbumCommand}">
+                add
+            </Button>
+            <Button 
+            x:Name="albumEditButton"
+            DockPanel.Dock="Right"
+            Margin="15,0,0,0"
+            Command="{Binding EditAlbumCommand}"
+            CommandParameter="{Binding SelectedAlbumViewModel}">
+                edit
+            </Button>
+            <Button 
+            x:Name="albumDeleteButton"
+            DockPanel.Dock="Right">
+                delete
+            </Button>
+
+        </DockPanel>
+
+
+    </StackPanel>
+</UserControl>
