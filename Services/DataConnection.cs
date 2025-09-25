@@ -163,6 +163,16 @@ namespace MusicDbEditor.Services
             };
         }
 
+        /// <summary>
+        /// Checks if a string is null or only whitespace and returns an empty string in those cases. Else, returns the string.
+        /// </summary>
+        /// <param name="value">The string to check for null or only whitespaces.</param>
+        /// <returns>An empty string if provided string is null or only whitespace, otherwise the string.</returns>
+        internal string GetTextStringForDb(string value)
+        {
+            return String.IsNullOrWhiteSpace(value) ? "" : value;
+        }
+
         #endregion
 
         #region Track Methods
@@ -321,7 +331,47 @@ namespace MusicDbEditor.Services
         }
 
 
+        public Album UpdateAlbum(Album album)
+        {
+            try
+            {
+                // open the db
+                using (var connection = new SqliteConnection(ConnectionString.ToString()))
+                {
+                    connection.Open();
 
+                    // create command for update
+                    var command = connection.CreateCommand();
+                    command.CommandText =
+                        @"
+                            UPDATE
+                                album
+                            SET
+                                name = @name,
+                                sort_name = @sortName,
+                                database_link = @databaseLink,
+                                purchase_link = @purchaseLink
+                            WHERE
+                                id = @id;
+                        ";
+                    // bind the values
+                    command.Parameters.Add("@name", SqliteType.Text).Value = GetTextStringForDb(album.Name);
+                    command.Parameters.Add("@sortName", SqliteType.Text).Value = GetTextStringForDb(album.SortName);
+                    command.Parameters.Add("@databaseLink", SqliteType.Text).Value = GetTextStringForDb(album.DatabaseLink);
+                    command.Parameters.Add("@purchaseLink", SqliteType.Text).Value = GetTextStringForDb(album.PurchaseLink);
+                    command.Parameters.Add("@id", SqliteType.Integer).Value = album.Id;
+
+                    // execute statement
+                    var numRowUpdated = command.ExecuteNonQuery();
+                    return album;
+                }
+            }
+            catch (SqliteException e)
+            {
+                MessageBox.Show($"There was an error updating the row.\nError text:\n{e}");
+            }
+            return null;
+        }
 
 
         #endregion

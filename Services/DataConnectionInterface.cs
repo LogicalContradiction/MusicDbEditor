@@ -19,6 +19,8 @@ namespace MusicDbEditor.Services
 
         public Album InsertAlbum(Album album);
 
+        public Album UpdateAlbum(Album album);
+
         #endregion
 
         #region Source Media Commands
