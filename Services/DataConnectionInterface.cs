@@ -7,6 +7,12 @@ namespace MusicDbEditor.Services
 
         public List<Track> GetTrackData();
 
+        #region DB Create
+
+        public void CreateNewDB();
+
+        #endregion
+
         #region Album Data
 
         public List<Album> GetAlbumData();

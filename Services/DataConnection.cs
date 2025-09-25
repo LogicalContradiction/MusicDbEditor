@@ -1,13 +1,6 @@
 ﻿using Microsoft.Data.Sqlite;
 using MusicDbEditor.Models;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Data;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
 using System.Windows;
 
 namespace MusicDbEditor.Services
@@ -16,20 +9,75 @@ namespace MusicDbEditor.Services
     internal class DataConnection : DataConnectionInterface
     {
         #region Properties
+
         /// <summary>
-        /// Singleton instance
+        /// Private backer for DataSource.
         /// </summary>
-        //public static DataConnection Instance { get; } = new DataConnection();
+        private string _dataSource;
 
         /// <summary>
         /// Path the the SQLite database.
         /// </summary>
-        public string DataSource { get; set; }
+        public string DataSource 
+        {
+            get {  return _dataSource; } 
+
+            set
+            {
+                // if current value is the same as new value, no point in updating info
+                if (String.Equals(_dataSource, value)) return;
+                // update the value
+                _dataSource = value;
+                // rebuild the connection string
+                UpdateSqliteConnectionString();
+            }
+        }
+
+        /// <summary>
+        /// Private backer for Mode.
+        /// </summary>
+        private SqliteOpenMode _mode;
 
         /// <summary>
         /// Mode to open the database in.
         /// </summary>
-        public SqliteOpenMode Mode { get; set; }
+        public SqliteOpenMode Mode
+        {
+            get { return _mode; }
+
+            set
+            {
+                // if current value is the same as new value, no point in updating info
+                if (_mode == value) return;
+                // update the value
+                _mode = value;
+                // rebuild the connection string
+                UpdateSqliteConnectionString();
+            }
+        }
+
+        /// <summary>
+        /// Private backer for CacheMode.
+        /// </summary>
+        private SqliteCacheMode _cacheMode;
+
+        /// <summary>
+        /// Cache mode to be used for the database.
+        /// </summary>
+        public SqliteCacheMode CacheMode
+        {
+            get { return _cacheMode; }
+
+            set
+            {
+                // if current value is the same as new value, no point in updating info
+                if (_cacheMode == value) return;
+                // update the value
+                _cacheMode = value;
+                // rebuild the connection string
+                UpdateSqliteConnectionString();
+            }
+        }
 
         /// <summary>
         /// The connection string to connect to the database
@@ -45,18 +93,58 @@ namespace MusicDbEditor.Services
         public DataConnection()
         {
             DataSource = @"tests/testDB.db";
-            Mode = SqliteOpenMode.ReadOnly; 
+            Mode = SqliteOpenMode.ReadWriteCreate;
+            CacheMode = SqliteCacheMode.Default;
 
-            ConnectionString = BuildSqliteConnectionString();
+            UpdateSqliteConnectionString();
         }
 
         #endregion
 
-        #region Static accessor
-        /// <summary>
-        /// Static accessor for singleton.
-        /// </summary>
-        //static DataConnection() { }
+        #region DB Methods
+        public void CreateNewDB()
+        {
+            try
+            {
+                // open connection to db
+                using (var connection = new SqliteConnection(ConnectionString.ToString()))
+                {
+                    connection.Open();
+
+                    // create the command that creates the db
+                    var command = connection.CreateCommand();
+                    command.CommandText =
+                        @"
+                            CREATE TABLE IF NOT EXISTS album 
+                                (id INTEGER PRIMARY KEY, name TEXT NOT NULL, sort_name TEXT, database_link TEXT, purchase_link TEXT);
+                            CREATE TABLE IF NOT EXISTS source_media 
+                                (id INTEGER PRIMARY KEY, name TEXT NOT NULL, sort_name TEXT);
+                            CREATE TABLE IF NOT EXISTS track
+                                (
+	                                id INTEGER PRIMARY KEY, 
+	                                name TEXT NOT NULL, 
+	                                name_in_stream_player TEXT, 
+	                                album_id INTEGER, 
+	                                link TEXT, 
+	                                notes TEXT, 
+	                                source_media_id INTEGER, 
+	                                FOREIGN KEY (album_id) REFERENCES album (id) 
+		                                ON UPDATE CASCADE 
+		                                ON DELETE RESTRICT, 
+	                                FOREIGN KEY (source_media_id) REFERENCES source_media (id) 
+		                                ON UPDATE CASCADE 
+		                                ON DELETE RESTRICT
+	                            );
+                        ";
+                    var returnValue = command.ExecuteNonQuery();
+                }
+            }
+            catch (SqliteException e)
+            {
+                MessageBox.Show($"There was an error creating the database.\nError info:\n {e.Message}");
+            }
+
+        }
 
         #endregion 
 
@@ -65,12 +153,13 @@ namespace MusicDbEditor.Services
         /// <summary>
         /// Builds the SQLite connection string based on
         /// </summary>
-        private SqliteConnectionStringBuilder BuildSqliteConnectionString()
+        private void UpdateSqliteConnectionString()
         {
-            return new SqliteConnectionStringBuilder()
+            ConnectionString = new SqliteConnectionStringBuilder()
             {
                 DataSource = DataSource,
                 Mode = Mode,
+                Cache = CacheMode,
             };
         }
 
@@ -201,14 +290,23 @@ namespace MusicDbEditor.Services
                             INSERT INTO
                                 album
                             VALUES
-                                (@name, @sortName, @databaseLink, @purchaseLink);
+                                (@id, @name, @sortName, @databaseLink, @purchaseLink);
                         ";
 
                     // bind the values to the parameters
+                    /*command.Parameters.AddWithValue("@id", DBNull.Value);
                     command.Parameters.AddWithValue("@name", album.Name);
                     command.Parameters.AddWithValue("@sortName", album.SortName);
                     command.Parameters.AddWithValue("@databaseLink", album.DatabaseLink);
-                    command.Parameters.AddWithValue("@purchaseLink", album.PurchaseLink);
+                    command.Parameters.AddWithValue("@purchaseLink", album.PurchaseLink);*/
+
+
+                    command.Parameters.Add("@id", SqliteType.Integer).Value = DBNull.Value;
+                    command.Parameters.Add("@name", SqliteType.Text).Value = album.Name;
+                    command.Parameters.Add("@sortName", SqliteType.Text).Value = (String.IsNullOrEmpty(album.SortName) ? "" : album.SortName);
+                    command.Parameters.Add("@databaseLink", SqliteType.Text).Value = (String.IsNullOrEmpty(album.DatabaseLink) ? "" : album.DatabaseLink);
+                    command.Parameters.Add("@purchaseLink", SqliteType.Text).Value = (String.IsNullOrEmpty(album.PurchaseLink) ? "" : album.PurchaseLink);
+
 
                     // execute statement
                     var numRowInserted = command.ExecuteNonQuery();
@@ -221,6 +319,10 @@ namespace MusicDbEditor.Services
             }
             return null;
         }
+
+
+
+
 
         #endregion
 
@@ -283,12 +385,13 @@ namespace MusicDbEditor.Services
                             INSERT INTO
                                 source_media
                             VALUES
-                                (@name, @sortName);
+                                (@id, @name, @sortName);
                         ";
 
                     // bind the values to the parameters
-                    command.Parameters.AddWithValue("@name", sourceMedia.Name);
-                    command.Parameters.AddWithValue("@sortName", sourceMedia.SortName);
+                    command.Parameters.Add("@id", SqliteType.Integer).Value = DBNull.Value;
+                    command.Parameters.Add("@name", SqliteType.Text).Value = sourceMedia.Name;
+                    command.Parameters.Add("@sortName", SqliteType.Text).Value = sourceMedia.SortName;
 
                     // execute statement
                     var numRowInserted = command.ExecuteNonQuery();

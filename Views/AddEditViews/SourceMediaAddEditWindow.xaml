@@ -6,7 +6,7 @@
         xmlns:dntk="clr-namespace:Xceed.Wpf.Toolkit;assembly=DotNetProjects.Wpf.Extended.Toolkit"
         xmlns:local="clr-namespace:MusicDbEditor.Views.AddEditViews"
         mc:Ignorable="d"
-        Title="SourceMediaAddEditWindow" Height="190" Width="500">
+        Title="SourceMediaAddEditWindow" Height="205" Width="500">
     <Border BorderThickness="0" Margin="5">
         <StackPanel>
             <!-- Header -->
