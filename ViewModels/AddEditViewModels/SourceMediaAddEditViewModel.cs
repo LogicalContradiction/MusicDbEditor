@@ -23,12 +23,12 @@ namespace MusicDbEditor.ViewModels.AddEditViewModels
         /// <summary>
         /// The name of the Source Media being edited.
         /// </summary>
-        public string NameEdit { get; set; }
+        public string NameEdit { get; set; } = "";
 
         /// <summary>
         /// The sort name of the Source Media begin edited.
         /// </summary>
-        public string SortNameEdit { get; set; }
+        public string SortNameEdit { get; set; } = "";
 
         #endregion
 

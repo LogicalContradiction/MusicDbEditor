@@ -23,22 +23,22 @@ namespace MusicDbEditor.ViewModels.AddEditViewModels
         /// <summary>
         /// The name of the album being edited.
         /// </summary>
-        public string NameEdit { get; set; }
+        public string NameEdit { get; set; } = "";
 
         /// <summary>
         /// The sort name of the album being edited.
         /// </summary>
-        public string SortNameEdit { get; set; }
+        public string SortNameEdit { get; set; } = "";
 
         /// <summary>
         /// The database link of the album being edited.
         /// </summary>
-        public string DatabaseLinkEdit { get; set; }
+        public string DatabaseLinkEdit { get; set; } = "";
 
         /// <summary>
         /// The purchase link of the album being edited.
         /// </summary>
-        public string PurchaseLinkEdit { get; set; }
+        public string PurchaseLinkEdit { get; set; } = "";
 
         #endregion
 
