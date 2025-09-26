@@ -378,6 +378,10 @@ namespace MusicDbEditor.Services
 
         #region Source Media Methods
 
+        /// <summary>
+        /// Gets a list of SourceMedia objects representing all rows in source_media column.
+        /// </summary>
+        /// <returns>A list containing SourceMedia objects. Contains all rows from source_media.</returns>
         public List<SourceMedia> GetSourceMediaData()
         {
             List<SourceMedia> result = new List<SourceMedia>();
@@ -395,7 +399,8 @@ namespace MusicDbEditor.Services
                         @"
                             SELECT
                                 id, name, sort_name
-                            FROM source_media;";
+                            FROM source_media;
+                        ";
 
                     // read the results into objects and put them into a list
                     using (var reader = command.ExecuteReader())
@@ -419,6 +424,11 @@ namespace MusicDbEditor.Services
             return result;
         }
 
+        /// <summary>
+        /// Inserts a new row in source_media table representing the sourceMedia object.
+        /// </summary>
+        /// <param name="sourceMedia">Represents the row to insert in the table.</param>
+        /// <returns>The sourceMedia that was passed in, or null if an error is thrown.</returns>
         public SourceMedia InsertSourceMedia(SourceMedia sourceMedia)
         {
             try
@@ -453,6 +463,46 @@ namespace MusicDbEditor.Services
                 MessageBox.Show($"There was an error inserting the row.\nError text:\n{e}");
             }
             return null;
+        }
+
+        /// <summary>
+        /// Updates a row in the source_media table of the db.
+        /// </summary>
+        /// <param name="sourceMedia">The data to be updated.</param>
+        /// <returns>The sourceMedia that was updated.</returns>
+        public SourceMedia UpdateSourceMedia(SourceMedia sourceMedia)
+        {
+            try
+            {
+                using (var connection = new SqliteConnection(ConnectionString.ToString()))
+                {
+                    connection.Open();
+                    var command = connection.CreateCommand();
+                    command.CommandText =
+                        @"
+                            UPDATE
+                                source_media
+                            SET
+                                name = @name,
+                                sort_name = @sortName
+                            WHERE
+                                id = @id;
+                        ";
+                    command.Parameters.Add("@name", SqliteType.Text).Value = GetTextStringForDb(sourceMedia.Name);
+                    command.Parameters.Add("@sortName", SqliteType.Text).Value = GetTextStringForDb(sourceMedia.SortName);
+                    command.Parameters.Add("@id", SqliteType.Integer).Value = sourceMedia.Id;
+
+                    // execute
+                    var numRowsUpdated = command.ExecuteNonQuery();
+                    return sourceMedia;
+                }
+            }
+            catch (SqliteException e)
+            {
+                MessageBox.Show($"There was an error updating the row.\nError text:\n{e}");
+            }
+            return null;
+
         }
 
         #endregion
