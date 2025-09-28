@@ -373,6 +373,42 @@ namespace MusicDbEditor.Services
             return null;
         }
 
+        /// <summary>
+        /// Deletes a row from the Album table using the provided info.
+        /// </summary>
+        /// <param name="album">The album data that is being deleted.</param>
+        public void DeleteAlbum(Album album)
+        {
+            try
+            {
+                // open the db
+                using (var connection = new SqliteConnection(ConnectionString.ToString()))
+                {
+                    connection.Open();
+
+                    // create command for delete
+                    var command = connection.CreateCommand();
+                    command.CommandText =
+                        @"
+                            DELETE FROM
+                                album
+                            WHERE
+                                id = @deletedAlbumId;
+                        ";
+                    // bind values
+                    command.Parameters.Add("@deletedAlbumId", SqliteType.Integer).Value = album.Id;
+
+                    // execute statement
+                    var numRowDeleted = command.ExecuteNonQuery();
+                }
+            }
+            catch (SqliteException e)
+            {
+                MessageBox.Show($"There was an error updating the row.\nError text:\n{e}");
+            }
+            return;
+        }
+
 
         #endregion
 

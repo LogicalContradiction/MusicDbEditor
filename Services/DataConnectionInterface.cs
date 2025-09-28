@@ -21,6 +21,8 @@ namespace MusicDbEditor.Services
 
         public Album UpdateAlbum(Album album);
 
+        public void DeleteAlbum(Album album);
+
         #endregion
 
         #region Source Media Commands
