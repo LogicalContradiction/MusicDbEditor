@@ -227,6 +227,63 @@ namespace MusicDbEditor.Services
             return result;
         }
 
+
+        /// <summary>
+        /// Gets all tracks that have the provided album id.
+        /// </summary>
+        /// <param name="albumId">The id of the album to get all the tracks with.</param>
+        /// <returns>A list of tracks with the provided album id. Null on error.</returns>
+        public List<Track> GetTracksByAlbumId(int albumId)
+        {
+            List<Track> result = new List<Track>();
+
+            try
+            {
+                using (var connection = new SqliteConnection(ConnectionString.ToString()))
+                {
+                    connection.Open();
+
+                    var command = connection.CreateCommand();
+                    command.CommandText =
+                        @"
+                            SELECT
+                                track.id, track.name, track.name_in_stream_player, album.name, track.link, track.notes, source_media.name
+                            FROM track
+                            LEFT JOIN album
+                            ON track.album_id = album.id
+                            LEFT JOIN source_media
+                            ON track.source_media_id = source_media.id
+                            WHERE
+                                album_id = @albumId;
+                        ";
+                    command.Parameters.Add("@albumId", SqliteType.Integer).Value = albumId;
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            result.Add(new Track()
+                            {
+                                Id = reader.GetInt32(0),
+                                Name = reader.GetString(1),
+                                NameInStreamPlayer = reader.GetString(2),
+                                AlbumName = reader.GetString(3),
+                                Link = reader.GetString(4),
+                                Notes = reader.GetString(5),
+                                SourceMediaName = reader.GetString(6),
+                            });
+                        }
+                    }
+                }
+                return result;
+            }
+            catch (SqliteException e)
+            {
+                MessageBox.Show($"There was an error when accessing the database.\nError text: '{e}'");
+            }
+            return null;
+        }
+
         #endregion
 
         #region Album Methods

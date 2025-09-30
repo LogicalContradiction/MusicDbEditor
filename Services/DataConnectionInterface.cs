@@ -13,6 +13,12 @@ namespace MusicDbEditor.Services
 
         #endregion
 
+        #region Track Data
+
+        public List<Track> GetTracksByAlbumId(int albumId);
+
+        #endregion
+
         #region Album Data
 
         public List<Album> GetAlbumData();
@@ -25,7 +31,7 @@ namespace MusicDbEditor.Services
 
         #endregion
 
-        #region Source Media Commands
+        #region Source Media Data
 
         public List<SourceMedia> GetSourceMediaData();
 
