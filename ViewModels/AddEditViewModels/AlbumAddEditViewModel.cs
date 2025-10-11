@@ -76,7 +76,7 @@ namespace MusicDbEditor.ViewModels.AddEditViewModels
             }
 
             CloseWindowCommand = new RelayCommand(closeAction);
-            //AddEditRowCommand = new RelayCommand(() => { AddEditRow(closeAction); });
+            AddEditRowCommand = new RelayCommand(() => { AddEditRow(closeAction, serviceProvider); });
 
 
         }

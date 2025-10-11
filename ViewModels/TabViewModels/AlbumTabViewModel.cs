@@ -24,7 +24,7 @@ namespace MusicDbEditor.ViewModels.TabViewModels
         #endregion
 
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
         /// The collection of albums to show to the user
@@ -58,6 +58,12 @@ namespace MusicDbEditor.ViewModels.TabViewModels
 
         #endregion
 
+        #region Private Properties
+
+        private ServiceProvider Services;
+
+        #endregion
+
         #region Commands
 
         /// <summary>
@@ -79,20 +85,40 @@ namespace MusicDbEditor.ViewModels.TabViewModels
         /// <param name="serviceProvider">Service provider used to get any needed service.</param>
         public AlbumTabViewModel(ServiceProvider serviceProvider)
         {
-            // get the data from the DataConnection and put them into viewmodels
-            var dataService = serviceProvider.GetService<DataConnectionInterface>();
-            var data = dataService.GetAlbumData().Select(album => new AlbumViewModel(album));
+            // save a reference to the service provider
+            Services = serviceProvider;
 
-            // put the data in this viewmodel
-            this.Albums = new ObservableCollection<AlbumViewModel>(data);
+            Albums = new ObservableCollection<AlbumViewModel>();
+
+            // Load the data into the ObservableList
+            RefreshAlbumInfo();
 
             // get the windowmanager
             var windowManager = serviceProvider.GetService<WindowManagerInterface>();
 
-            EditAlbumCommand = new RelayCommandConditional(() => { windowManager.OpenEditAlbumWindow(SelectedAlbumViewModel, serviceProvider); });
-            AddAlbumCommand = new RelayCommand(() => { windowManager.OpenAddAlbumWindow(serviceProvider); });
+            EditAlbumCommand = new RelayCommandConditional(() => { windowManager.OpenEditAlbumWindow(SelectedAlbumViewModel, serviceProvider, RefreshAlbumInfo); });
+            AddAlbumCommand = new RelayCommand(() => { windowManager.OpenAddAlbumWindow(serviceProvider, RefreshAlbumInfo); });
 
         
+        }
+
+        #endregion
+
+        #region Helper Methods
+
+        /// <summary>
+        /// Refreshes the data in the Albums ObservableList.
+        /// </summary>
+        internal void RefreshAlbumInfo()
+        {
+            // get the data service
+            var dataService = Services.GetService<DataConnectionInterface>();
+            // get the data from the service
+            var data = dataService.GetAlbumData().Select(album => new AlbumViewModel(album));
+            // put it into the viewmodel
+            Albums.Clear();
+            foreach(var albumViewModel in data) Albums.Add(albumViewModel);
+
         }
 
         #endregion

@@ -16,14 +16,16 @@ namespace MusicDbEditor.Services
         /// Opens a window to add a new album info.
         /// </summary>
         /// <param name="serviceProvider">The service provider to be used by the view model.</param>
-        public bool OpenAddAlbumWindow(ServiceProvider serviceProvider);
+        /// <param name="refreshData">Action used to refresh the data if a new entry is added.</param>
+        public bool OpenAddAlbumWindow(ServiceProvider serviceProvider, Action refreshData);
 
         /// <summary>
         /// Opens a window to edit an existing album info.
         /// </summary>
         /// <param name="albumViewModel">The album whose data is being edited.</param>
         /// <param name="serviceProvider">The service provider to be used by the view model.</param>
-        public bool OpenEditAlbumWindow(AlbumViewModel albumViewModel, ServiceProvider serviceProvider);
+        /// <param name="refreshData">Action used to refresh the data if a new entry is added.</param>
+        public bool OpenEditAlbumWindow(AlbumViewModel albumViewModel, ServiceProvider serviceProvider, Action refreshData);
 
         #endregion
 

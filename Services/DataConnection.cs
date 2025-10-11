@@ -1,6 +1,5 @@
 ﻿using Microsoft.Data.Sqlite;
 using MusicDbEditor.Models;
-using System.Runtime.CompilerServices;
 using System.Windows;
 
 namespace MusicDbEditor.Services
@@ -200,7 +199,8 @@ namespace MusicDbEditor.Services
                             LEFT JOIN album
                             ON track.album_id = album.id
                             LEFT JOIN source_media
-                            ON track.source_media_id = source_media.id;";
+                            ON track.source_media_id = source_media.id;
+                        ";
 
                     using (var reader = command.ExecuteReader())
                     {
